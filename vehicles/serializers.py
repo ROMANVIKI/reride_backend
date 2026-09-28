@@ -44,8 +44,14 @@ class StoreSerializer(serializers.ModelSerializer):
     class Meta:
         model = Store
         fields = [
-            "id", "name", "area", "city", "address", "phone",
-            "latitude", "longitude",
+            "id",
+            "name",
+            "area",
+            "city",
+            "address",
+            "phone",
+            "latitude",
+            "longitude",
         ]
 
 
@@ -74,7 +80,9 @@ class VehicleListSerializer(serializers.ModelSerializer):
     originalPrice = serializers.IntegerField(source="original_price", read_only=True)
     freeService = serializers.BooleanField(source="free_service", read_only=True)
     soldLastMonth = serializers.IntegerField(source="sold_last_month", read_only=True)
-    discountPercent = serializers.IntegerField(source="discount_percent", read_only=True)
+    discountPercent = serializers.IntegerField(
+        source="discount_percent", read_only=True
+    )
     highlights = serializers.SlugRelatedField(
         slug_field="text", many=True, read_only=True
     )
@@ -86,11 +94,35 @@ class VehicleListSerializer(serializers.ModelSerializer):
     class Meta:
         model = Vehicle
         fields = [
-            "id", "slug", "brand", "model", "variant", "type", "modelYear",
-            "km", "owners", "price", "originalPrice", "discountPercent", "emi",
-            "city", "area", "tier", "fuel", "color", "registration",
-            "highlights", "warranty", "freeService", "demand", "soldLastMonth",
-            "status", "image", "isFavorite", "isMine", "createdAt",
+            "id",
+            "slug",
+            "brand",
+            "model",
+            "variant",
+            "type",
+            "modelYear",
+            "km",
+            "owners",
+            "price",
+            "originalPrice",
+            "discountPercent",
+            "emi",
+            "city",
+            "area",
+            "tier",
+            "fuel",
+            "color",
+            "registration",
+            "highlights",
+            "warranty",
+            "freeService",
+            "demand",
+            "soldLastMonth",
+            "status",
+            "image",
+            "isFavorite",
+            "isMine",
+            "createdAt",
         ]
 
     def get_image(self, obj):
@@ -122,12 +154,17 @@ class VehicleDetailSerializer(VehicleListSerializer):
 
     class Meta(VehicleListSerializer.Meta):
         fields = VehicleListSerializer.Meta.fields + [
-            "description", "images", "store", "seller", "viewsCount", "updatedAt",
+            "description",
+            "images",
+            "store",
+            "seller",
+            "viewsCount",
+            "updatedAt",
         ]
 
     def get_seller(self, obj):
         if not obj.seller:
-            return {"name": "SriBalajiBikes", "city": obj.city, "isDealer": True}
+            return {"name": "DaddyBike", "city": obj.city, "isDealer": True}
         return {
             "id": obj.seller.id,
             "name": obj.seller.get_full_name(),
@@ -170,10 +207,26 @@ class VehicleWriteSerializer(serializers.ModelSerializer):
     class Meta:
         model = Vehicle
         fields = [
-            "brand", "model", "variant", "type", "modelYear", "km", "owners",
-            "price", "originalPrice", "city", "area", "fuel", "color",
-            "registration", "warranty", "freeService", "description",
-            "highlights", "images", "status",
+            "brand",
+            "model",
+            "variant",
+            "type",
+            "modelYear",
+            "km",
+            "owners",
+            "price",
+            "originalPrice",
+            "city",
+            "area",
+            "fuel",
+            "color",
+            "registration",
+            "warranty",
+            "freeService",
+            "description",
+            "highlights",
+            "images",
+            "status",
         ]
 
     # -- validation -------------------------------------------------------
@@ -220,7 +273,9 @@ class VehicleWriteSerializer(serializers.ModelSerializer):
         )
         if original and price and original <= price:
             raise serializers.ValidationError(
-                {"originalPrice": "The original price must be higher than the asking price."}
+                {
+                    "originalPrice": "The original price must be higher than the asking price."
+                }
             )
         return attrs
 
@@ -264,7 +319,11 @@ class VehicleWriteSerializer(serializers.ModelSerializer):
         )
         self._sync_highlights(
             vehicle,
-            highlights if highlights is not None else ["Seller-listed", "Posted via SriBalajiBikes"],
+            (
+                highlights
+                if highlights is not None
+                else ["Seller-listed", "Posted via DaddyBike"]
+            ),
         )
         if images:
             self._add_images(vehicle, images)
@@ -368,8 +427,14 @@ class ServicePackageSerializer(serializers.ModelSerializer):
     class Meta:
         model = ServicePackage
         fields = [
-            "id", "code", "name", "price", "priceLabel", "description",
-            "items", "isHighlighted",
+            "id",
+            "code",
+            "name",
+            "price",
+            "priceLabel",
+            "description",
+            "items",
+            "isHighlighted",
         ]
 
     def get_items(self, obj):

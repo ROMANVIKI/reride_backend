@@ -1,5 +1,5 @@
 """
-Django settings for the SriBalajiBikes (ReRide) backend.
+Django settings for the Daddy Bike(ReRide) backend.
 
 Configuration is driven by environment variables so the same codebase runs
 in local development and in production. Copy `.env.example` to `.env` and
@@ -112,7 +112,9 @@ DATABASES = {
 AUTH_USER_MODEL = "accounts.User"
 
 AUTH_PASSWORD_VALIDATORS = [
-    {"NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator"},
+    {
+        "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator"
+    },
     {
         "NAME": "django.contrib.auth.password_validation.MinimumLengthValidator",
         "OPTIONS": {"min_length": 8},
@@ -205,14 +207,16 @@ EMAIL_USE_SSL = config("EMAIL_USE_SSL", default=False, cast=bool)
 EMAIL_HOST_USER = config("EMAIL_HOST_USER", default="")
 EMAIL_HOST_PASSWORD = config("EMAIL_HOST_PASSWORD", default="")
 DEFAULT_FROM_EMAIL = config(
-    "DEFAULT_FROM_EMAIL", default="SriBalajiBikes <no-reply@sribalajibikes.local>"
+    "DEFAULT_FROM_EMAIL", default="daddybike<no-reply@daddybike.local>"
 )
 
 # OTP behaviour
 OTP_LENGTH = config("OTP_LENGTH", default=6, cast=int)
 OTP_TTL_MINUTES = config("OTP_TTL_MINUTES", default=10, cast=int)
 OTP_MAX_ATTEMPTS = config("OTP_MAX_ATTEMPTS", default=5, cast=int)
-OTP_RESEND_COOLDOWN_SECONDS = config("OTP_RESEND_COOLDOWN_SECONDS", default=60, cast=int)
+OTP_RESEND_COOLDOWN_SECONDS = config(
+    "OTP_RESEND_COOLDOWN_SECONDS", default=60, cast=int
+)
 
 # When DEBUG is on, the OTP is also returned in the API response so you can
 # test the flow without reading the console. Never enable this in production.

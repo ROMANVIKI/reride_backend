@@ -1,4 +1,4 @@
-# SriBalajiBikes — Backend API
+# DaddyBike — Backend API
 
 Django 6 + Django REST Framework. JWT auth with e-mail OTP verification.
 See the root `README.md` for the full API reference and deployment guide.
@@ -15,15 +15,15 @@ python manage.py runserver
 
 Visit `http://localhost:8000/` for a live map of every endpoint.
 
-Demo account: `demo@sribalajibikes.com` / `Demo@12345`
+Demo account: `demo@daddybike.com` / `Demo@12345`
 
 ## Apps
 
-| App | Responsibility |
-|---|---|
-| `accounts` | Custom e-mail user model, OTP issue/verify, JWT, passwords |
-| `vehicles` | Listings, images, favourites, valuation engine, site content |
-| `leads` | Sell enquiries, contact, service bookings, test rides, reservations |
+| App        | Responsibility                                                      |
+| ---------- | ------------------------------------------------------------------- |
+| `accounts` | Custom e-mail user model, OTP issue/verify, JWT, passwords          |
+| `vehicles` | Listings, images, favourites, valuation engine, site content        |
+| `leads`    | Sell enquiries, contact, service bookings, test rides, reservations |
 
 ## E-mail in development
 
@@ -40,4 +40,5 @@ python manage.py test
 ## Config
 
 Copy `.env.example` to `.env`. All values have working local defaults.
+
 # reride_backend
