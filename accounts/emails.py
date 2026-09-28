@@ -20,7 +20,7 @@ def _wrap(title, body_html):
   <div style="max-width:520px;margin:0 auto;background:#ffffff;border:1px solid #dcd9d0;">
     <div style="background:#1f4d3a;padding:20px 28px;">
       <span style="color:#ffffff;font-size:18px;font-weight:600;letter-spacing:-0.02em;">
-        SriBalajiBikes
+       DaddyBike 
       </span>
     </div>
     <div style="padding:28px;">
@@ -28,7 +28,7 @@ def _wrap(title, body_html):
       {body_html}
     </div>
     <div style="padding:18px 28px;border-top:1px solid #dcd9d0;color:#6b7178;font-size:12px;">
-      You are receiving this because someone used this address on SriBalajiBikes.
+      You are receiving this because someone used this address on DaddyBike.
       If that wasn't you, you can ignore this e-mail.
     </div>
   </div>
@@ -47,7 +47,7 @@ _PURPOSE_COPY = {
     "register": (
         "Verify your e-mail address",
         "Thanks for signing up. Use the code below to finish creating your "
-        "SriBalajiBikes account.",
+        "DaddyBike account.",
     ),
     "password_reset": (
         "Reset your password",
@@ -56,7 +56,7 @@ _PURPOSE_COPY = {
     ),
     "email_change": (
         "Confirm your new e-mail address",
-        "Use the code below to confirm this address on your SriBalajiBikes "
+        "Use the code below to confirm this address on your DaddyBike"
         "account.",
     ),
 }
@@ -78,7 +78,7 @@ def send_otp_email(otp):
 
     try:
         message = EmailMultiAlternatives(
-            subject=f"{otp.code} is your SriBalajiBikes code",
+            subject=f"{otp.code} is your DaddyBike code",
             body=text,
             from_email=settings.DEFAULT_FROM_EMAIL,
             to=[otp.email],
@@ -107,7 +107,7 @@ def send_welcome_email(user):
     )
     try:
         message = EmailMultiAlternatives(
-            subject="Welcome to SriBalajiBikes",
+            subject="Welcome to DaddyBike",
             body=(
                 f"Hi {user.get_short_name()}, your account is verified and ready. "
                 f"Visit {settings.FRONTEND_URL}/dashboard to get started."
@@ -128,7 +128,7 @@ def notify_team(subject, body):
         return
     try:
         send_mail(
-            subject=f"[SriBalajiBikes] {subject}",
+            subject=f"[DaddyBike] {subject}",
             message=body,
             from_email=settings.DEFAULT_FROM_EMAIL,
             recipient_list=recipients,

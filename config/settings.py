@@ -94,11 +94,20 @@ ASGI_APPLICATION = "config.asgi.application"
 # --------------------------------------------------------------------------
 # Database
 # --------------------------------------------------------------------------
-# Defaults to SQLite. Set DATABASE_URL (e.g. a Postgres URL) in production.
+# DATABASE_URL is required. There is no fallback: if it is missing or empty,
+# the app refuses to start.
+
+DATABASE_URL = config("DATABASE_URL", default="").strip()
+
+if not DATABASE_URL:
+    raise RuntimeError(
+        "DATABASE_URL is not set. Add it to your .env file or environment, "
+        "e.g. DATABASE_URL=postgres://user:password@host:5432/dbname"
+    )
 
 DATABASES = {
-    "default": dj_database_url.config(
-        default=config("DATABASE_URL", default=f"sqlite:///{BASE_DIR / 'db.sqlite3'}"),
+    "default": dj_database_url.parse(
+        DATABASE_URL,
         conn_max_age=600,
         conn_health_checks=True,
     )

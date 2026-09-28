@@ -54,6 +54,7 @@ class RegisterView(APIView):
 
     def post(self, request):
         serializer = RegisterSerializer(data=request.data)
+        print(request.data, " ___ .><> Data from the frontend!!!")
         serializer.is_valid(raise_exception=True)
         user = serializer.save()
 
